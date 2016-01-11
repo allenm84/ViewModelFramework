@@ -39,33 +39,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="content\[Framework]\Base\BaseAcceptableViewModel.cs" />
-    <Compile Include="content\[Framework]\Base\BaseBroadcastViewModel.cs" />
-    <Compile Include="content\[Framework]\Base\BaseDataViewModel.cs" />
-    <Compile Include="content\[Framework]\Base\BaseEditableListViewModel.cs" />
-    <Compile Include="content\[Framework]\Base\BaseEditableViewModel.cs" />
-    <Compile Include="content\[Framework]\Base\BaseIDNameViewModel.cs" />
-    <Compile Include="content\[Framework]\Base\BaseIDViewModel.cs" />
-    <Compile Include="content\[Framework]\Base\BaseListViewModel.cs" />
-    <Compile Include="content\[Framework]\Base\BaseLookUpListViewModel.cs" />
-    <Compile Include="content\[Framework]\Base\BaseSelectableViewModel.cs" />
-    <Compile Include="content\[Framework]\Base\BaseViewModel.cs" />
-    <Compile Include="content\[Framework]\Broadcast\IViewModelReceiver.cs" />
-    <Compile Include="content\[Framework]\Broadcast\ViewModelBroadcaster.cs" />
-    <Compile Include="content\[Framework]\Common\BaseNotifyPropertyChanged.cs" />
-    <Compile Include="content\[Framework]\Common\ConfirmViewModel.cs" />
-    <Compile Include="content\[Framework]\Common\DelegateCommand.cs" />
-    <Compile Include="content\[Framework]\Items\ValueDisplayItem.cs" />
-    <Compile Include="content\[Framework]\Tools\Clone.cs" />
+    <Compile Include="BaseAcceptableViewModel.cs" />
+    <Compile Include="BaseBroadcastViewModel.cs" />
+    <Compile Include="BaseDataViewModel.cs" />
+    <Compile Include="BaseEditableListViewModel.cs" />
+    <Compile Include="BaseEditableViewModel.cs" />
+    <Compile Include="BaseIDNameViewModel.cs" />
+    <Compile Include="BaseIDViewModel.cs" />
+    <Compile Include="BaseListViewModel.cs" />
+    <Compile Include="BaseLookUpListViewModel.cs" />
+    <Compile Include="BaseSelectableViewModel.cs" />
+    <Compile Include="BaseViewModel.cs" />
+    <Compile Include="IViewModelReceiver.cs" />
+    <Compile Include="ViewModelBroadcaster.cs" />
+    <Compile Include="BaseNotifyPropertyChanged.cs" />
+    <Compile Include="ConfirmViewModel.cs" />
+    <Compile Include="DelegateCommand.cs" />
+    <Compile Include="ValueDisplayItem.cs" />
+    <Compile Include="Clone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="content\[Framework]\Tools\ObservableBindingList.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ViewModelFramework.nuspec" />
+    <Compile Include="ObservableBindingList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)packages\NuGet.CommandLine.2.8.6\tools\NuGet.exe" pack "$(ProjectDir)ViewModelFramework.nuspec" -BasePath "$(SolutionDir)$(ProjectName)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
