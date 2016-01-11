@@ -140,7 +140,7 @@ namespace ViewModelFramework
       return mItems.Any(i => i.Selected);
     }
 
-    private async void DoRemove()
+    protected virtual async void DoRemove()
     {
       bool confirmed = await ConfirmViewModel.Confirm(this, "Are you sure you want to remove the selected items?");
       if (!confirmed)
