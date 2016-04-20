@@ -9,7 +9,7 @@ using System.Windows.Input;
 namespace ViewModelFramework
 {
   public abstract class BaseEditableListViewModel<T> : BaseListViewModel<T>
-    where T : BaseEditableViewModel
+    where T : BaseEditableItemViewModel
   {
     private T mCurrentItem;
 
@@ -64,13 +64,13 @@ namespace ViewModelFramework
       mClearCommand.Refresh();
     }
 
-    private void OnListChanged()
+    private void OnListChanged(ListChangedType type)
     {
       RefreshEditCommands();
-      InternalOnListChanged();
+      InternalOnListChanged(type);
     }
 
-    protected virtual void InternalOnListChanged()
+    protected virtual void InternalOnListChanged(ListChangedType type)
     {
       
     }
@@ -83,16 +83,15 @@ namespace ViewModelFramework
       RefreshEditCommands();
     }
 
-    internal Task<T> AddItem(BaseBroadcastViewModel broadcaster)
+    protected Task<T> AddItem()
     {
-      var item = CreateNew();
-      return AddItem(item, broadcaster);
+      return AddItem(CreateNew());
     }
 
-    internal async Task<T> AddItem(T item, BaseBroadcastViewModel broadcaster)
+    protected async Task<T> AddItem(T item)
     {
-      var editor = item.CreateEditor();
-      if (!broadcaster.Send(editor))
+      var editor = item.CreateEditor(true);
+      if (!Send(editor))
       {
         return default(T);
       }
@@ -101,7 +100,6 @@ namespace ViewModelFramework
       if (accepted)
       {
         mItems.Add(item);
-        OnListChanged();
         return item;
       }
       else
@@ -112,7 +110,7 @@ namespace ViewModelFramework
 
     private async void DoAdd()
     {
-      await AddItem(this);
+      await AddItem();
     }
 
     private bool CanEdit()
@@ -122,7 +120,7 @@ namespace ViewModelFramework
 
     private async void DoEdit()
     {
-      var editor = mCurrentItem.CreateEditor();
+      var editor = mCurrentItem.CreateEditor(false);
       if (!Send(editor))
       {
         return;
@@ -131,7 +129,7 @@ namespace ViewModelFramework
       var accepted = await editor.Completed;
       if (accepted)
       {
-        OnListChanged();
+        OnListChanged(ListChangedType.ItemChanged);
       }
     }
 
@@ -140,9 +138,20 @@ namespace ViewModelFramework
       return mItems.Any(i => i.Selected);
     }
 
-    protected virtual async void DoRemove()
+    protected virtual async Task<bool> BeforeDoRemove()
     {
-      bool confirmed = await ConfirmViewModel.Confirm(this, "Are you sure you want to remove the selected items?");
+      return await Task.FromResult(true);
+    }
+
+    protected async void DoRemove()
+    {
+      bool cancelled = await BeforeDoRemove();
+      if (!cancelled)
+      {
+        return;
+      }
+
+      bool confirmed = await ShowConfirmation("Are you sure you want to remove the selected items?");
       if (!confirmed)
       {
         return;
@@ -155,7 +164,6 @@ namespace ViewModelFramework
           mItems.RemoveAt(i);
         }
       }
-      OnListChanged();
     }
 
     private bool CanClear()
@@ -163,21 +171,31 @@ namespace ViewModelFramework
       return mItems.Count > 0;
     }
 
+    protected virtual async Task<bool> BeforeDoClear()
+    {
+      return await Task.FromResult(true);
+    }
+
     private async void DoClear()
     {
-      bool confirmed = await ConfirmViewModel.Confirm(this, "Are you sure you want to clear all of the items?");
+      bool cancelled = await BeforeDoClear();
+      if (!cancelled)
+      {
+        return;
+      }
+
+      bool confirmed = await ShowConfirmation("Are you sure you want to clear all of the items?");
       if (!confirmed)
       {
         return;
       }
 
       mItems.Clear();
-      OnListChanged();
     }
 
     private void mItems_ListChanged(object sender, ListChangedEventArgs e)
     {
-      OnListChanged();
+      OnListChanged(e.ListChangedType);
     }
   }
 }

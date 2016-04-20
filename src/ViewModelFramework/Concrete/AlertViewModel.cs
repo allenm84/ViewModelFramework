@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ViewModelFramework
 {
-  public abstract class BaseIDNameViewModel : BaseIDViewModel
+  public class AlertViewModel : BasePopupViewModel
   {
-    public string Name
+    internal AlertViewModel(string message, string caption)
     {
-      get { return GetField<string>(); }
-      internal set { SetField(value); }
+      Message = message;
+      Caption = caption;
     }
   }
 }

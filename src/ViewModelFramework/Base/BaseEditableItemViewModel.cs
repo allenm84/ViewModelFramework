@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ViewModelFramework
 {
-  public abstract class BaseEditableViewModel : BaseSelectableViewModel
+  public abstract class BaseEditableItemViewModel : BaseSelectableViewModel
   {
-    internal abstract BaseViewModel CreateEditor();
+    public abstract BaseViewModel CreateEditor(bool isForAdding);
   }
 }

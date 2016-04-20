@@ -39,27 +39,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseAcceptableViewModel.cs" />
-    <Compile Include="BaseBroadcastViewModel.cs" />
-    <Compile Include="BaseDataViewModel.cs" />
-    <Compile Include="BaseEditableListViewModel.cs" />
-    <Compile Include="BaseEditableViewModel.cs" />
-    <Compile Include="BaseIDNameViewModel.cs" />
-    <Compile Include="BaseIDViewModel.cs" />
-    <Compile Include="BaseListViewModel.cs" />
-    <Compile Include="BaseLookUpListViewModel.cs" />
-    <Compile Include="BaseSelectableViewModel.cs" />
-    <Compile Include="BaseViewModel.cs" />
-    <Compile Include="IViewModelReceiver.cs" />
-    <Compile Include="ViewModelBroadcaster.cs" />
-    <Compile Include="BaseNotifyPropertyChanged.cs" />
-    <Compile Include="ConfirmViewModel.cs" />
-    <Compile Include="DelegateCommand.cs" />
-    <Compile Include="ValueDisplayItem.cs" />
-    <Compile Include="Clone.cs" />
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Base\BasePopupViewModel.cs" />
+    <Compile Include="Base\BaseViewModel.cs" />
+    <Compile Include="Base\BaseEditableListViewModel.cs" />
+    <Compile Include="Base\BaseEditableItemViewModel.cs" />
+    <Compile Include="Base\BaseLookUpItemViewModel.cs" />
+    <Compile Include="Base\BaseListViewModel.cs" />
+    <Compile Include="Base\BaseLookUpListViewModel.cs" />
+    <Compile Include="Base\BaseSelectableViewModel.cs" />
+    <Compile Include="Concrete\AlertViewModel.cs" />
+    <Compile Include="Broadcast\IViewModelReceiver.cs" />
+    <Compile Include="Broadcast\ViewModelBroadcaster.cs" />
+    <Compile Include="Base\BaseNotifyPropertyChanged.cs" />
+    <Compile Include="Concrete\ConfirmViewModel.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Tools\ValueDisplayItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ObservableBindingList.cs" />
+    <Compile Include="Tools\ObservableBindingList.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

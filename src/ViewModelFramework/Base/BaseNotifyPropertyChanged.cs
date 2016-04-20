@@ -10,26 +10,6 @@ namespace ViewModelFramework
 {
   public abstract class BaseNotifyPropertyChanged : INotifyPropertyChanged
   {
-    private class NotifyPropertyChangedDefer : IDisposable
-    {
-      private WeakReference<BaseNotifyPropertyChanged> reference;
-
-      public NotifyPropertyChangedDefer(BaseNotifyPropertyChanged value)
-      {
-        reference = new WeakReference<BaseNotifyPropertyChanged>(value);
-        value.SuspendNotifications();
-      }
-
-      public void Dispose()
-      {
-        BaseNotifyPropertyChanged value;
-        if (reference.TryGetTarget(out value))
-        {
-          value.ResumeNotifications();
-        }
-      }
-    }
-
     private bool mAllowPropertyChangedEvents = true;
 
     public event PropertyChangedEventHandler PropertyChanged;
@@ -75,6 +55,26 @@ namespace ViewModelFramework
       }
 
       AfterPropertyChanged(propertyName);
+    }
+
+    private class NotifyPropertyChangedDefer : IDisposable
+    {
+      private WeakReference<BaseNotifyPropertyChanged> reference;
+
+      public NotifyPropertyChangedDefer(BaseNotifyPropertyChanged value)
+      {
+        reference = new WeakReference<BaseNotifyPropertyChanged>(value);
+        value.SuspendNotifications();
+      }
+
+      public void Dispose()
+      {
+        BaseNotifyPropertyChanged value;
+        if (reference.TryGetTarget(out value))
+        {
+          value.ResumeNotifications();
+        }
+      }
     }
   }
 }

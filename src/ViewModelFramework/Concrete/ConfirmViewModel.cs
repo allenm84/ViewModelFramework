@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ViewModelFramework
 {
-  public abstract class BaseIDViewModel : BaseEditableViewModel
+  public sealed class ConfirmViewModel : BasePopupViewModel
   {
-    internal string ID
+    internal ConfirmViewModel(string message, string caption)
     {
-      get { return GetField<string>(); }
-      set { SetField(value); }
+      Message = message;
+      Caption = caption;
     }
   }
 }

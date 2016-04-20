@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace ViewModelFramework
 {
   public abstract class BaseLookUpListViewModel<T> : BaseEditableListViewModel<T>
-    where T : BaseIDViewModel
+    where T : BaseLookUpItemViewModel
   {
     private readonly Dictionary<string, T> mLookUp = new Dictionary<string, T>();
 
-    internal T this[string id]
+    public T this[string id]
     {
       get
       {
@@ -34,13 +34,13 @@ namespace ViewModelFramework
     protected override void OnViewModelAdded(T viewModel)
     {
       base.OnViewModelAdded(viewModel);
-      mLookUp[viewModel.ID] = viewModel;
+      mLookUp[viewModel.Id] = viewModel;
     }
 
     protected override void OnViewModelRemoved(T viewModel)
     {
       base.OnViewModelRemoved(viewModel);
-      mLookUp.Remove(viewModel.ID);
+      mLookUp.Remove(viewModel.Id);
     }
   }
 }

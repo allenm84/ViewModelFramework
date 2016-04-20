@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace ViewModelFramework
 {
-  public abstract class BaseListViewModel<T> : BaseBroadcastViewModel, IBindingListObserver<T>
+  public abstract class BaseListViewModel<T> : BaseViewModel, IBindingListObserver<T>
     where T : BaseViewModel
   {
     protected readonly BindingList<T> mItems;
-    protected T[] mCommittedItems;
 
     public BaseListViewModel()
     {
@@ -21,25 +20,6 @@ namespace ViewModelFramework
     public BindingList<T> Items
     {
       get { return mItems; }
-    }
-
-    protected override void InternalCommit()
-    {
-      mCommittedItems = mItems.ToArray();
-      base.InternalCommit();
-    }
-
-    protected override void InternalRollback()
-    {
-      if (mCommittedItems != null)
-      {
-        mItems.Clear();
-        foreach (var item in mCommittedItems)
-        {
-          mItems.Add(item);
-        }
-      }
-      base.InternalRollback();
     }
 
     protected virtual void OnListCleared()

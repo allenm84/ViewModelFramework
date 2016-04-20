@@ -8,14 +8,20 @@ namespace ViewModelFramework
 {
   public sealed class ViewModelBroadcaster
   {
-    private readonly List<WeakReference<IViewModelReceiver>> mReceivers = new List<WeakReference<IViewModelReceiver>>();
-
-    public ViewModelBroadcaster(BaseBroadcastViewModel owner)
+    static readonly Lazy<ViewModelBroadcaster> sLazyInstance;
+    static ViewModelBroadcaster()
     {
-      Owner = owner;
+      sLazyInstance = new Lazy<ViewModelBroadcaster>(() => new ViewModelBroadcaster(), true);
     }
 
-    public BaseBroadcastViewModel Owner { get; private set; }
+    public static ViewModelBroadcaster Instance
+    {
+      get { return sLazyInstance.Value; }
+    }
+
+    private readonly List<WeakReference<IViewModelReceiver>> mReceivers = new List<WeakReference<IViewModelReceiver>>();
+
+    private ViewModelBroadcaster() { }
 
     public void Add(IViewModelReceiver receiver)
     {
