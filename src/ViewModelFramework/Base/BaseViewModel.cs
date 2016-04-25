@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace ViewModelFramework
 {
-  public abstract class BaseViewModel : BaseNotifyPropertyChanged
+  public abstract class BaseViewModel : BaseNotifyPropertyChanged, IDisposable
   {
     private readonly Dictionary<string, object> mFields = new Dictionary<string, object>();
     private readonly TaskCompletionSource<bool> mSource;
@@ -32,9 +32,15 @@ namespace ViewModelFramework
       mSource.SetResult(result);
     }
 
-    public void ForceCompleted()
+    public void Dispose()
     {
-      SetCompleted(false);
+      mSource.TrySetResult(false);
+      Dispose(true);
+    }
+
+    protected virtual void Dispose(bool isExplicit)
+    {
+      // do nothing
     }
 
     public bool Send(BaseViewModel viewModel)
