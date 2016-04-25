@@ -8,10 +8,19 @@ namespace ViewModelFramework
 {
   public class AlertViewModel : BasePopupViewModel
   {
-    internal AlertViewModel(string message, string caption)
+    private readonly DelegateCommand mAcceptCommand;
+
+    public AlertViewModel(string message, string caption)
     {
       Message = message;
       Caption = caption;
+
+      mAcceptCommand = new DelegateCommand(() => SetCompleted(true));
+    }
+
+    public BaseCommand AcceptCommand
+    {
+      get { return mAcceptCommand; }
     }
   }
 }
