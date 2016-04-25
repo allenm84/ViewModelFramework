@@ -32,6 +32,11 @@ namespace ViewModelFramework
       mSource.SetResult(result);
     }
 
+    public void ForceCompleted()
+    {
+      SetCompleted(false);
+    }
+
     public bool Send(BaseViewModel viewModel)
     {
       return ViewModelBroadcaster.Instance.Send(viewModel);

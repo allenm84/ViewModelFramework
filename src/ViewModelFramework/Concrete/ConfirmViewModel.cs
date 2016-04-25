@@ -6,12 +6,28 @@ using System.Threading.Tasks;
 
 namespace ViewModelFramework
 {
-  public sealed class ConfirmViewModel : BasePopupViewModel
+  public class ConfirmViewModel : BasePopupViewModel
   {
-    internal ConfirmViewModel(string message, string caption)
+    private readonly DelegateCommand mYesCommand;
+    private readonly DelegateCommand mNoCommand;
+
+    public ConfirmViewModel(string message, string caption)
     {
       Message = message;
       Caption = caption;
+
+      mYesCommand = new DelegateCommand(() => SetCompleted(true));
+      mNoCommand = new DelegateCommand(() => SetCompleted(false));
+    }
+
+    public BaseCommand YesCommand
+    {
+      get { return mYesCommand; }
+    }
+
+    public BaseCommand NoCommand
+    {
+      get { return mNoCommand; }
     }
   }
 }
