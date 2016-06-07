@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BaseEditorViewModel.cs" />
+    <Compile Include="Base\BasePropertyBag.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Base\BasePopupViewModel.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
@@ -54,6 +56,9 @@
     <Compile Include="Base\BaseNotifyPropertyChanged.cs" />
     <Compile Include="Concrete\ConfirmViewModel.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Concrete\NullableValue.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Tools\NotifyValue.cs" />
     <Compile Include="Tools\ValueDisplayItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\ObservableBindingList.cs" />
