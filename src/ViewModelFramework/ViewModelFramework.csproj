@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\main\src\PersonalFinanceSimulation.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,12 +57,14 @@
     <Compile Include="Base\BaseNotifyPropertyChanged.cs" />
     <Compile Include="Concrete\ConfirmViewModel.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="Concrete\NullableValue.cs" />
+    <Compile Include="Values\ConditionalValue.cs" />
+    <Compile Include="Values\NullableValue.cs" />
     <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="Tools\NotifyValue.cs" />
-    <Compile Include="Tools\ValueDisplayItem.cs" />
+    <Compile Include="Values\NotifyValue.cs" />
+    <Compile Include="Items\ValueDisplayItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\ObservableBindingList.cs" />
+    <Compile Include="Collections\ObservableBindingList.cs" />
+    <Compile Include="Values\SelectableValue.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

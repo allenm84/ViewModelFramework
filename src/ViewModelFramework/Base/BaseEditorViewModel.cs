@@ -17,6 +17,21 @@ namespace ViewModelFramework
       mRejectCommand = new DelegateCommand(DoReject, CanReject);
     }
 
+    public BaseCommand AcceptCommand
+    {
+      get { return mAcceptCommand; }
+    }
+
+    public BaseCommand RejectCommand
+    {
+      get { return mRejectCommand; }
+    }
+
+    protected override void AfterPropertyChanged(string propertyName)
+    {
+      RefreshAcceptReject();
+    }
+
     protected void RefreshAcceptReject()
     {
       RefreshAccept();

@@ -37,21 +37,25 @@ namespace ViewModelFramework
       }
     }
 
+    [DisplayName("Add")]
     public ICommand AddCommand
     {
       get { return mAddCommand; }
     }
 
+    [DisplayName("Edit")]
     public ICommand EditCommand
     {
       get { return mEditCommand; }
     }
 
+    [DisplayName("Remove")]
     public ICommand RemoveCommand
     {
       get { return mRemoveCommand; }
     }
 
+    [DisplayName("Clear")]
     public ICommand ClearCommand
     {
       get { return mClearCommand; }
