@@ -14,11 +14,27 @@ namespace ViewModelFramework
 {
   public abstract class BaseViewModel : BasePropertyBag, IDisposable
   {
+    private readonly DelegateCommand mAcceptCommand;
+    private readonly DelegateCommand mRejectCommand;
+
     private readonly TaskCompletionSource<bool> mSource;
 
     public BaseViewModel()
     {
+      mAcceptCommand = new DelegateCommand(DoAccept, CanAccept);
+      mRejectCommand = new DelegateCommand(DoReject, CanReject);
+
       mSource = new TaskCompletionSource<bool>();
+    }
+
+    public BaseCommand AcceptCommand
+    {
+      get { return mAcceptCommand; }
+    }
+
+    public BaseCommand RejectCommand
+    {
+      get { return mRejectCommand; }
     }
 
     public Task<bool> Completed
@@ -31,13 +47,74 @@ namespace ViewModelFramework
       mSource.SetResult(result);
     }
 
+    protected override void AfterPropertyChanged(string propertyName)
+    {
+      RefreshAcceptReject();
+    }
+
+    protected void RefreshAcceptReject()
+    {
+      RefreshAccept();
+      RefreshReject();
+    }
+
+    protected void RefreshReject()
+    {
+      mRejectCommand.Refresh();
+    }
+
+    protected virtual bool CanReject()
+    {
+      return true;
+    }
+
+    protected virtual void BeforeRejected()
+    {
+    }
+
+    protected virtual void AfterRejected()
+    {
+    }
+
+    private void DoReject()
+    {
+      BeforeRejected();
+      SetCompleted(true);
+      AfterRejected();
+    }
+
+    protected void RefreshAccept()
+    {
+      mAcceptCommand.Refresh();
+    }
+
+    protected virtual bool CanAccept()
+    {
+      return true;
+    }
+
+    protected virtual void BeforeAccepted()
+    {
+    }
+
+    protected virtual void AfterAccepted()
+    {
+    }
+
+    private void DoAccept()
+    {
+      BeforeAccepted();
+      SetCompleted(true);
+      AfterAccepted();
+    }
+
     public void Dispose()
     {
       mSource.TrySetResult(false);
-      Dispose(true);
+      OnDispose(true);
     }
 
-    protected virtual void Dispose(bool isExplicit)
+    protected virtual void OnDispose(bool disposing)
     {
       // do nothing
     }

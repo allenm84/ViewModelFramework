@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\BaseEditorViewModel.cs" />
     <Compile Include="Base\BasePropertyBag.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Base\BasePopupViewModel.cs" />
