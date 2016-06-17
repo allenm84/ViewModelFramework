@@ -66,6 +66,12 @@ namespace ViewModelFramework
       mEditCommand.Refresh();
       mRemoveCommand.Refresh();
       mClearCommand.Refresh();
+      InternalRefreshEditCommands();
+    }
+
+    protected virtual void InternalRefreshEditCommands()
+    {
+      
     }
 
     private void OnListChanged(ListChangedType type)

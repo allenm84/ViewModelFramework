@@ -50,6 +50,7 @@
     <Compile Include="Base\BaseListViewModel.cs" />
     <Compile Include="Base\BaseLookUpListViewModel.cs" />
     <Compile Include="Base\BaseSelectableViewModel.cs" />
+    <Compile Include="Commands\EnabledDelegateCommand.cs" />
     <Compile Include="Concrete\AlertViewModel.cs" />
     <Compile Include="Broadcast\IViewModelReceiver.cs" />
     <Compile Include="Broadcast\ViewModelBroadcaster.cs" />

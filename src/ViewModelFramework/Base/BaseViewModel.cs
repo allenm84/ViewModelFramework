@@ -79,7 +79,7 @@ namespace ViewModelFramework
     private void DoReject()
     {
       BeforeRejected();
-      SetCompleted(true);
+      SetCompleted(false);
       AfterRejected();
     }
 
