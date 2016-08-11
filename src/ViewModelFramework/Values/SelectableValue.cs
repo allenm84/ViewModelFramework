@@ -45,10 +45,10 @@ namespace ViewModelFramework
     public void Set(IEnumerable<ValueDisplayItem<T>> items)
     {
       mItems.Clear();
-      Add(items);
+      AddRange(items);
     }
 
-    public void Add(IEnumerable<ValueDisplayItem<T>> items)
+    public void AddRange(IEnumerable<ValueDisplayItem<T>> items)
     {
       mItems.AddRange(items);
       OnChanged(EventArgs.Empty);
