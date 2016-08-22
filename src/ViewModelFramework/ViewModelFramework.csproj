@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BasePropertyBag.cs" />
+    <Compile Include="Collections\ReadOnlyBindingList.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Base\BasePopupViewModel.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
