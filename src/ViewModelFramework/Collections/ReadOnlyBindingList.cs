@@ -127,7 +127,7 @@ namespace ViewModelFramework
     /// <summary> Not supported. </summary>
     public void EndNew(int itemIndex)
     {
-      throw new NotSupportedException();
+      // do nothing
     }
 
     /// <summary> Returns the index of the row that has the specified property. </summary>

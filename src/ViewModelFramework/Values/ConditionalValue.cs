@@ -13,13 +13,13 @@ namespace ViewModelFramework
       Enabled = true;
     }
 
-    public bool Enabled
+    public virtual bool Enabled
     {
       get { return GetField<bool>(); }
       set { SetField(value); }
     }
 
-    public T Value
+    public virtual T Value
     {
       get { return GetField<T>(); }
       set { SetField(value); }
