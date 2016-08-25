@@ -19,38 +19,25 @@ namespace ViewModelFramework
       get { return sLazyInstance.Value; }
     }
 
-    private readonly List<WeakReference<IViewModelReceiver>> mReceivers = new List<WeakReference<IViewModelReceiver>>();
+    private readonly List<IViewModelReceiver> mReceivers = new List<IViewModelReceiver>();
 
     private ViewModelBroadcaster() { }
 
     public void Add(IViewModelReceiver receiver)
     {
-      mReceivers.Add(new WeakReference<IViewModelReceiver>(receiver));
+      mReceivers.Add(receiver);
     }
 
     public bool Remove(IViewModelReceiver receiver)
     {
-      bool removed = false;
-
-      IViewModelReceiver item;
-      for (int i = mReceivers.Count - 1; i > -1; --i)
-      {
-        if (mReceivers[i].TryGetTarget(out item) && ReferenceEquals(item, receiver))
-        {
-          mReceivers.RemoveAt(i);
-          removed = true;
-        }
-      }
-
-      return removed;
+      return mReceivers.Remove(receiver);
     }
 
     internal bool Send(BaseViewModel viewModel)
     {
-      IViewModelReceiver item;
-      foreach (var value in mReceivers)
+      foreach (var receiver in mReceivers)
       {
-        if (value.TryGetTarget(out item) && item.Receive(viewModel))
+        if (receiver.Receive(viewModel))
         {
           return true;
         }
